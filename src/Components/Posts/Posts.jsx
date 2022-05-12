@@ -45,7 +45,7 @@ const Posts = ()=>{
      },[])
 
      return( <main>
-                  <Box sx={{width : "50%" , margin : "30px auto 0"}}>
+                  <Box sx={{ width:{ xs : "85%" , sm : "75%" , md : "60%" , lg :  '50%' }, margin : "30px auto 0" ,  }}>
                      <Input text="add new post" fun={addNewPostHandel} uniqe='post' row="5" />
                   </Box>
                { data?.map((el)=>{
