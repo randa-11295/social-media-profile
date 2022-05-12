@@ -12,8 +12,8 @@ import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-
+import Input from "../Input/Input"
+import ClearIcon from '@mui/icons-material/Clear';
 
 
 const ExpandMore = styled((props) => {
@@ -44,7 +44,7 @@ export default function PostCard(props) {
         }
         action={
           <IconButton aria-label="settings">
-            <MoreVertIcon />
+           <ClearIcon />
           </IconButton>
         }
         title={props.data.title}
@@ -74,12 +74,10 @@ export default function PostCard(props) {
 
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Method:</Typography>
           
-          <Typography paragraph>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and set
-            aside for 10 minutes.
-          </Typography>
+          <Input />
+
+   
      
           <Typography>
             Set aside off of the heat to let rest for 10 minutes, and then serve.
