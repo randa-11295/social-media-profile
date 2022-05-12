@@ -1,13 +1,10 @@
 import './App.css';
-
+import Posts from '../Posts/Posts.jsx';
 function App() {
    
   return (
     
-        <p>
-            and save to reload.
-            yyyyy
-        </p>
+        <Posts />
         
   );
 }
