@@ -10,10 +10,12 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
+import EditIcon from '@mui/icons-material/Edit';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Input from "../Input/Input"
 import ClearIcon from '@mui/icons-material/Clear';
+import EditOffIcon from '@mui/icons-material/EditOff';
+
 
 
 const ExpandMore = styled((props) => {
@@ -29,10 +31,18 @@ const ExpandMore = styled((props) => {
 
 export default function PostCard(props) {
   const [expanded, setExpanded] = React.useState(false);
+  const [edit, setEdit] = React.useState(false);
 
   const handleExpandClick = () => {
       setExpanded(!expanded);
   };
+
+  const getTextEditPost= (val)=>{
+
+     props.editPost(props.data.id , val)
+     setEdit(false)
+
+  }
 
   return (
     <Card sx={{ width: '50%' , margin : "30px auto" }}>
@@ -51,16 +61,18 @@ export default function PostCard(props) {
       />
      
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
-            {  props.data.body  }
+
+        <Typography  component={'div'} variant="body2" color="text.secondary">
+            {( edit ? <Input  fun={getTextEditPost} /> : <p>  {props.data.body} </p>)  }
         </Typography>
+
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
+        <IconButton onClick={()=>{setEdit(!edit)}} aria-label="share">
+           {( edit ? <EditOffIcon /> : <EditIcon /> )}
         </IconButton>
         <ExpandMore
           expand={expanded}
@@ -76,12 +88,11 @@ export default function PostCard(props) {
         <CardContent>
           
           <Input />
-
-   
      
           <Typography>
-            Set aside off of the heat to let rest for 10 minutes, and then serve.
+              Set aside off of the heat to let rest for 10 minutes, and then serve.
           </Typography>
+
         </CardContent>
       </Collapse>
     </Card>

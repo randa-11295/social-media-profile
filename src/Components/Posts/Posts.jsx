@@ -8,7 +8,7 @@ import { v4 as uuid } from 'uuid';
 const Posts = ()=>{
     const [data , setData]  = useState([])
 
-    const addNewPost = (val)=>{
+    const addNewPostHandel = (val)=>{
       if(val){
           const newPost =  {  userId: uuid(),
                               id: uuid(),
@@ -18,12 +18,21 @@ const Posts = ()=>{
           setData([newPost , ...data])
         }}
 
-    const removePost = (id)=>{
+    const removePostHandel = (id)=>{
          const removedPost = data.filter(el =>{
               return (el.id !== id) })
          setData(removedPost)
     }
-
+   
+    const editPostHandel =(id , val) =>{
+         const indxEl =  data.findIndex((el)=>{
+          return el.id === id
+          })
+         setData( data.map((item, index) =>{
+          
+          return  index === indxEl ? { ...item, 'body' : val } : item      
+     }))
+    }
 
      useEffect(()=>{
           axios.get('https://jsonplaceholder.typicode.com/posts').then(function (response) {
@@ -35,11 +44,11 @@ const Posts = ()=>{
 
      return( <main>
                   <Box sx={{width : "50%" , margin : "30px auto 0"}}>
-                     <Input text="add new post" fun={addNewPost} uniqe='post' row="5" />
+                     <Input text="add new post" fun={addNewPostHandel} uniqe='post' row="5" />
                   </Box>
-               {  data?.map((el)=>{
-                         return <PostCard  removePost={removePost}  data={el} key={el.id}/>
-               }) }
+               { data?.map((el)=>{
+                      return <PostCard removePost={removePostHandel}  editPost={editPostHandel} data={el} key={el.id}/>
+               })}
             </main>
         )}
 
