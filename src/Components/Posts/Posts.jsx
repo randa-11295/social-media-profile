@@ -25,9 +25,11 @@ const Posts = ()=>{
     }
    
     const editPostHandel =(id , val) =>{
+
          const indxEl =  data.findIndex((el)=>{
           return el.id === id
           })
+
          setData( data.map((item, index) =>{
           
           return  index === indxEl ? { ...item, 'body' : val } : item      

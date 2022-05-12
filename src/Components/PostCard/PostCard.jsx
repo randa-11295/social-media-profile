@@ -8,14 +8,13 @@ import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import EditIcon from '@mui/icons-material/Edit';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Input from "../Input/Input"
 import ClearIcon from '@mui/icons-material/Clear';
 import EditOffIcon from '@mui/icons-material/EditOff';
-
+import avatar from "../../Images/avatar.jpg"
 
 
 const ExpandMore = styled((props) => {
@@ -47,17 +46,13 @@ export default function PostCard(props) {
   return (
     <Card sx={{ width: '50%' , margin : "30px auto" }}>
       <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
-          </Avatar>
-        }
-        action={
-          <IconButton onClick={()=>props.removePost(props.data.id)}  aria-label="remove">
-              <ClearIcon />
-          </IconButton>
-        }
-        title={props.data.title}
+        avatar={ <Avatar alt="randa mohamed " src={avatar} /> }
+        action={ <IconButton onClick={()=>props.removePost(props.data.id)}  aria-label="remove">
+                      <ClearIcon />
+                 </IconButton>  }
+ 
+        title="Randa Mohamed"
+        subheader={props.data.title}
       />
      
       <CardContent>
@@ -72,7 +67,7 @@ export default function PostCard(props) {
           <FavoriteIcon />
         </IconButton>
         <IconButton onClick={()=>{setEdit(!edit)}} aria-label="share">
-           {( edit ? <EditOffIcon /> : <EditIcon /> )}
+        {( edit ? <EditOffIcon /> : <EditIcon /> )}
         </IconButton>
         <ExpandMore
           expand={expanded}
