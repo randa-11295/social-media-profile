@@ -9,14 +9,19 @@ const Posts = ()=>{
     const [data , setData]  = useState([])
 
     const addNewPost = (val)=>{
-         console.log(val)
-     const newPost =  {   userId: uuid(),
-                         id: uuid(),
-                         title: "New Post",
-                         body: val  }
+      if(val){
+          const newPost =  {  userId: uuid(),
+                              id: uuid(),
+                              title: "New Post",
+                              body: val  }
 
-        setData([newPost , ...data])
-        console.log([newPost , ...data])
+          setData([newPost , ...data])
+        }}
+
+    const removePost = (id)=>{
+         const removedPost = data.filter(el =>{
+              return (el.id !== id) })
+         setData(removedPost)
     }
 
 
@@ -33,7 +38,7 @@ const Posts = ()=>{
                      <Input text="add new post" fun={addNewPost} uniqe='post' row="5" />
                   </Box>
                {  data?.map((el)=>{
-                         return <PostCard  data={el} key={el.id}/>
+                         return <PostCard  removePost={removePost}  data={el} key={el.id}/>
                }) }
             </main>
         )}

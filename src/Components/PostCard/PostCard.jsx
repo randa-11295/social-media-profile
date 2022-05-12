@@ -31,7 +31,7 @@ export default function PostCard(props) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
-    setExpanded(!expanded);
+      setExpanded(!expanded);
   };
 
   return (
@@ -43,8 +43,8 @@ export default function PostCard(props) {
           </Avatar>
         }
         action={
-          <IconButton aria-label="settings">
-           <ClearIcon />
+          <IconButton onClick={()=>props.removePost(props.data.id)}  aria-label="remove">
+              <ClearIcon />
           </IconButton>
         }
         title={props.data.title}
