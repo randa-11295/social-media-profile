@@ -3,9 +3,9 @@ import bg from "../../Images/bg.jpg";
 import avatar from "../../Images/avatar.jpg"
 
 const headerStyle = {backgroundImage : `url(${bg})` ,             
-                    backgroundPosition : 'center',
-                    backgroundSize : "cover" ,
-                    height : "35vh"}
+                     backgroundPosition : 'center',
+                     backgroundSize : "cover" ,
+                     height : "35vh"}
                     
 const avatarStyle = {
             width : "180px",

@@ -7,38 +7,52 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import {  pink } from '@mui/material/colors';
+import { useContext , useEffect , useState } from 'react';
+import CommentsContext from '../../Context/commentsContext';
 
-export default function AlignItemsList() {
+export default function Comments(props) {
+     const commentsData = useContext(CommentsContext);
+     const [commentsPost , setcommentsPost] = useState([])
+
+     useEffect(()=>{
+        const  commentsFilter =  commentsData.comments?.filter((el)=>{
+             return el.postId === props.postId
+        })
+        setcommentsPost(commentsFilter)
+
+     },[commentsData.comments,  props.postId])
+
   return (<>
     
-    <List sx={{ width: '100%',  bgcolor: 'background.paper' , marginTop : "15px" }}>
-    <Divider  />
-
-      <ListItem alignItems="flex-start">
+    <List sx={{ width: '100%',  bgcolor: 'background.paper' , paddingTop : "15px" }}>
+     { commentsPost.map(el =>{ return ( <aside key={ el.id}>
+       <Divider  />
+       <ListItem alignItems="flex-start">
 
         <ListItemAvatar>
-          <Avatar   sx={{ bgcolor: pink[500] ,  width: 35, height: 35 , fontSize : '1.1rem'  }} > R </Avatar>
+          <Avatar   sx={{ bgcolor: pink[500] ,  width: 35, height: 35 , fontSize : '1.1rem'  }} > {el.name[0]} </Avatar>
         </ListItemAvatar>
 
-        <ListItemText
-          primary="Brunch this weekend?"
+        <ListItemText 
+          primary={el.name}
           secondary={
             <React.Fragment>
               <Typography
-                sx={{ display: 'inline' , fontSize : '.8rem'  }}
-                component="span"
-                variant="body2"
-                color="text.primary"
+                sx={{ fontSize : '.8rem'  }}
+                component="p"
               >
-                Ali Connors
+               
+                 {el.body}
               </Typography >
-              {" — I'll be in your neighborhood doing errands this…"}
             </React.Fragment>
           }
         />
       </ListItem>
-     
+      </aside>
+     )})}
+
     </List>
    </>
+   
   );
 }

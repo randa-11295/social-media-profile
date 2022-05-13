@@ -4,9 +4,11 @@ import PostCard from "../PostCard/PostCard";
 import Input from "../Input/Input" ;
 import Box from '@mui/material/Box';
 import { v4 as uuid } from 'uuid';
+import commentsContext  from "../../Context/commentsContext";
 
 const Posts = ()=>{
     const [postsData , setPostsData]  = useState([])
+    const [commentsData , setcommentsData]  = useState([])
 
     const addNewPostHandel = (val)=>{
       if(val){
@@ -40,17 +42,29 @@ const Posts = ()=>{
           axios.get('https://jsonplaceholder.typicode.com/posts').then(function (response) {
                setPostsData(response.data)
           }).catch(function (error) {
-               console.error(error);
+               console.log(error);
           });
+
+          axios.get('https://jsonplaceholder.typicode.com/comments').then(function (response) {
+               setcommentsData(response.data)
+          }).catch(function (error) {
+               console.log(error);
+          });
+
      },[])
 
      return( <main>
-                  <Box sx={{ width:{ xs : "85%" , sm : "75%" , md : "60%" , lg :  '50%' }, margin : "30px auto 0" ,  }}>
+               <commentsContext.Provider value={{ comments : commentsData}} >
+                  <Box sx={{ width:{ xs : "85%" , sm : "75%" , md : "60%" , lg :  '50%' }, 
+                             margin : "30px auto 0" ,  }}>
+
                      <Input text="add new post" fun={addNewPostHandel} uniqe='post' row="5" />
+
                   </Box>
-               { postsData?.map((el)=>{
-                      return <PostCard removePost={removePostHandel}  editPost={editPostHandel} postsData={el} key={el.id}/>
-               })}
+                    { postsData?.map((el)=>{
+                         return <PostCard removePost={removePostHandel}  editPost={editPostHandel} postsData={el} key={el.id}/>
+                    })}
+               </commentsContext.Provider>
             </main>
         )}
 

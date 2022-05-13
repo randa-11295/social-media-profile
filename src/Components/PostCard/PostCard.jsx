@@ -44,7 +44,7 @@ export default function PostCard(props) {
   }
 
   return (
-    <Card sx={{ width:{ xs : "85%" , sm : "75%" , md : "60%" , lg :  '50%' }, margin : "30px auto" , background : "white"}}>
+    <Card sx={{ width:{ xs : "85%" , sm : "75%" , md : "60%" , lg :  '50%' }, margin : "30px auto 15px" ,  background : "white"}}>
       <CardHeader
         avatar={ <Avatar alt="randa mohamed " src={avatar} /> }
         action={ <IconButton onClick={()=>props.removePost(props.data.id)}  aria-label="remove">
@@ -84,7 +84,7 @@ export default function PostCard(props) {
           
           <Input />
      
-          <Comments />
+          <Comments postId={props.postsData.id} />
 
         </CardContent>
       </Collapse>
