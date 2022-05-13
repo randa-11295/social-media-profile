@@ -10,46 +10,71 @@ const Posts = ()=>{
     const [postsData , setPostsData]  = useState([])
     const [commentsData , setcommentsData]  = useState([])
 
-    const addNewPostHandel = (val)=>{
-      if(val){
-          const newPost =  {  userId: uuid(),
+// posts functions
+const addNewPostHandel = (val)=>{
+     if(val){
+     const newPost =  {  userId: uuid(),
+                         id: uuid(),
+                         title: "New Post",
+                         body: val  }
+
+     setPostsData([newPost , ...postsData])
+}}
+
+ 
+const removePostHandel = (PostId)=>{
+       const removedPost = postsData.filter(el =>{
+                          return (el.id !==  PostId) })
+             setPostsData(removedPost)
+}
+
+const editPostHandel =(PostId , val) =>{
+     if (val){
+     const indxEl =  postsData.findIndex((el)=>{
+     return el.id === PostId
+     })
+
+     setPostsData( postsData.map((item, index) =>{
+     
+     return  index === indxEl ? { ...item, 'body' : val } : item      
+     }))
+   }
+}
+    
+
+     // comments functions
+const addNewCommentHandel = (val , PostId)=>{
+if(val){
+     const newComment =  {  postId: PostId,
                               id: uuid(),
-                              title: "New Post",
+                              name: "New Comment",
                               body: val  }
 
-         setPostsData([newPost , ...postsData])
-        }}
+setcommentsData([newComment , ...commentsData])
+}
+}
 
-    const removePostHandel = (id)=>{
-         const removedPost = postsData.filter(el =>{
-              return (el.id !== id) })
-          setPostsData(removedPost)
-    }
-   
-    const editPostHandel =(id , val) =>{
 
-         const indxEl =  postsData.findIndex((el)=>{
-          return el.id === id
-          })
+const removeCommentHandel = (commentId) =>{
+     const removedPost = commentsData.filter(el =>{
+     return (el.id !==  commentId) })
+     
+      setcommentsData(removedPost)
+}
 
-          setPostsData( postsData.map((item, index) =>{
-          
-          return  index === indxEl ? { ...item, 'body' : val } : item      
+const editCommentHandel =(commentId , val) =>{
+     if (val){
+     const indxEl =  commentsData.findIndex((el)=>{
+     return el.id === commentId
+     })
+     setcommentsData( commentsData.map((item, index) =>{
+     
+     return  index === indxEl ? { ...item, 'body' : val } : item      
      }))
-    }
-    
-    const addNewCommentHandel = (val , PostId)=>{
-               if(val){
-                    const newComment =  {  postId: PostId,
-                                             id: uuid(),
-                                             name: "New Comment",
-                                             body: val  }
+   }
+}
 
-               setcommentsData([newComment , ...commentsData])
-               }
-    }
-
-
+    // commpont functions 
      useEffect(()=>{
           axios.get('https://jsonplaceholder.typicode.com/posts').then(function (response) {
                setPostsData(response.data)
@@ -66,7 +91,9 @@ const Posts = ()=>{
      },[])
 
      return( <main>
-               <commentsContext.Provider value={{ comments : commentsData}} >
+               <commentsContext.Provider value={{ comments : commentsData ,
+                                                  editComment : editCommentHandel,
+                                                  removeComment :  removeCommentHandel }} >
                   <Box sx={{ width:{ xs : "85%" , sm : "75%" , md : "60%" , lg :  '50%' }, 
                              margin : "30px auto 0" ,  }}>
 
@@ -77,7 +104,7 @@ const Posts = ()=>{
                          return <PostCard  postsData={el} key={el.id}
                                            removePost={removePostHandel}  
                                            editPost={editPostHandel} 
-                                           addNewComment={addNewCommentHandel}
+                                           addNewComment={addNewCommentHandel}                 
                                  />
                     })}
                </commentsContext.Provider>

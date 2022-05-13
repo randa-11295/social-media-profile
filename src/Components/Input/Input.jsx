@@ -7,7 +7,7 @@ import SendIcon from '@mui/icons-material/Send';
 import IconButton from '@mui/material/IconButton';
 
 export default function InputAdornments(props) {
-  const [values, setValues] = React.useState("");
+  const [values, setValues] = React.useState(props.val || "");
 
   const handleChange = (event) => {
     setValues( event.target.value );
@@ -15,15 +15,14 @@ export default function InputAdornments(props) {
 
 
   return (
-      
-        <FormControl fullWidth  variant="outlined"  >
+        <FormControl fullWidth  variant="outlined"   component="span"  >
              <FormHelperText id="outlined--helper-text">{props.text}</FormHelperText>
-          <OutlinedInput sx={{ background : "white"}}
+          <OutlinedInput  component="span"  sx={{ fontSize : ".8rem" , background : "white"}}
             id={`outlined-adornment-${props.unique}`}
             value={values}
             size="small"
             multiline
-            maxRows={props.row}
+            minRows={props.row || 1}
             onChange={handleChange}
             endAdornment={<InputAdornment position="end"> 
                <IconButton  onClick={()=>{ setValues("") ; props.fun(values)}} size="small" aria-label="share">

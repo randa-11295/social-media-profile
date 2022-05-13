@@ -47,14 +47,14 @@ export default function PostCard(props) {
      props.addNewComment(val , props.postsData.id)
   }
 
+ 
   return (
     <Card sx={{ width:{ xs : "85%" , sm : "75%" , md : "60%" , lg :  '50%' }, margin : "30px auto 15px" ,  background : "white"}}>
       <CardHeader
         avatar={ <Avatar alt="randa mohamed " src={avatar} /> }
-        action={ <IconButton onClick={()=>props.removePost(props.data.id)}  aria-label="remove">
+        action={ <IconButton onClick={()=>props.removePost(props.postsData.id)}  aria-label="remove">
                       <ClearIcon />
                  </IconButton>  }
- 
         title="Randa Mohamed"
         subheader={props.postsData.title}
       />
@@ -62,12 +62,14 @@ export default function PostCard(props) {
       <CardContent>
 
         <Typography  component={'div'} variant="body2" color="text.secondary">
-            {( edit ? <Input  fun={getTextEditPost} /> : <p>  {props.postsData.body} </p>)  }
+            {( edit ? <Input val={props.postsData.body} row={3}  fun={getTextEditPost} /> : <p>  {props.postsData.body} </p>)  }
         </Typography>
 
       </CardContent>
+
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+
+        <IconButton aria-label="favorites">
           <FavoriteIcon />
         </IconButton>
         <IconButton onClick={()=>{setEdit(!edit)}} aria-label="share">
@@ -81,6 +83,7 @@ export default function PostCard(props) {
         >
           <ExpandMoreIcon />
         </ExpandMore>
+
       </CardActions>
 
       <Collapse in={expanded} timeout="auto" unmountOnExit>

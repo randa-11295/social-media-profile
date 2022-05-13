@@ -1,7 +1,9 @@
 import { createContext } from "react";
   
  const commentsContext = createContext(
-          { comments : []}
+          { comments : [],
+            removeComment: ()=>{}
+        }
   );
 
   export default  commentsContext
