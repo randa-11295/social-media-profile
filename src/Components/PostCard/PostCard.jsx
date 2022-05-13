@@ -43,6 +43,10 @@ export default function PostCard(props) {
 
   }
 
+  const getTextNewComment = (val)=>{
+     props.addNewComment(val , props.postsData.id)
+  }
+
   return (
     <Card sx={{ width:{ xs : "85%" , sm : "75%" , md : "60%" , lg :  '50%' }, margin : "30px auto 15px" ,  background : "white"}}>
       <CardHeader
@@ -80,9 +84,9 @@ export default function PostCard(props) {
       </CardActions>
 
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
+         <CardContent>
           
-          <Input />
+            <Input fun={getTextNewComment} unique="comment" text="Write a comment"/>
      
           <Comments postId={props.postsData.id} />
 

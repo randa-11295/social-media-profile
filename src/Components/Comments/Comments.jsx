@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import {  pink } from '@mui/material/colors';
 import { useContext , useEffect , useState } from 'react';
 import CommentsContext from '../../Context/commentsContext';
-
+import avatar from "../../Images/avatar.jpg"
 export default function Comments(props) {
      const commentsData = useContext(CommentsContext);
      const [commentsPost , setcommentsPost] = useState([])
@@ -24,28 +24,23 @@ export default function Comments(props) {
 
   return (<>
     
-    <List sx={{ width: '100%',  bgcolor: 'background.paper' , paddingTop : "15px" }}>
-     { commentsPost.map(el =>{ return ( <aside key={ el.id}>
+    <List sx={{ width: '100%',  bgcolor: 'background.paper' , pddingTop : "15px" }}>
+     { commentsPost.map(el =>{  return ( <aside key={ el.id}>
        <Divider  />
        <ListItem alignItems="flex-start">
 
         <ListItemAvatar>
-          <Avatar   sx={{ bgcolor: pink[500] ,  width: 35, height: 35 , fontSize : '1.1rem'  }} > {el.name[0]} </Avatar>
+          {(  el.name === "New Comment" ? <Avatar sx={{ width: 35, height: 35 }}  alt="user" src={avatar}/> :
+            <Avatar   sx={{ bgcolor: pink[500] ,  width: 35, height: 35 , fontSize : '1.1rem'  }} > {el.name[0]} </Avatar>
+          )}
         </ListItemAvatar>
 
         <ListItemText 
           primary={el.name}
-          secondary={
-            <React.Fragment>
-              <Typography
-                sx={{ fontSize : '.8rem'  }}
-                component="p"
-              >
-               
-                 {el.body}
-              </Typography >
-            </React.Fragment>
-          }
+          secondary={  <Typography sx={{ fontSize : '.8rem'  }}   component="span" >    
+                              {el.body}
+                      </Typography >                 
+                    }
         />
       </ListItem>
       </aside>

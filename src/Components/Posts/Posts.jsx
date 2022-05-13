@@ -37,6 +37,18 @@ const Posts = ()=>{
           return  index === indxEl ? { ...item, 'body' : val } : item      
      }))
     }
+    
+    const addNewCommentHandel = (val , PostId)=>{
+               if(val){
+                    const newComment =  {  postId: PostId,
+                                             id: uuid(),
+                                             name: "New Comment",
+                                             body: val  }
+
+               setcommentsData([newComment , ...commentsData])
+               }
+    }
+
 
      useEffect(()=>{
           axios.get('https://jsonplaceholder.typicode.com/posts').then(function (response) {
@@ -62,7 +74,11 @@ const Posts = ()=>{
 
                   </Box>
                     { postsData?.map((el)=>{
-                         return <PostCard removePost={removePostHandel}  editPost={editPostHandel} postsData={el} key={el.id}/>
+                         return <PostCard  postsData={el} key={el.id}
+                                           removePost={removePostHandel}  
+                                           editPost={editPostHandel} 
+                                           addNewComment={addNewCommentHandel}
+                                 />
                     })}
                </commentsContext.Provider>
             </main>
