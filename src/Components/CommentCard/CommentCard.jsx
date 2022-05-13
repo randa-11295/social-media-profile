@@ -31,7 +31,7 @@ const getTextComment =(val)=>{
 
         <ListItemAvatar>
           {(  props.commentdata.name === "New Comment" ? <Avatar sx={{ width: 35, height: 35 }}  alt="user" src={avatar}/> :
-            <Avatar   sx={{ bgcolor: pink[500] ,  width: 35, height: 35 , fontSize : '1.1rem'  }} > {props.commentdata.name[0]} </Avatar>
+            <Avatar   sx={{ bgcolor: pink[700] ,  width: 35, height: 35 , fontSize : '1.1rem'  }} > {props.commentdata.name[0]} </Avatar>
           )}
         </ListItemAvatar>
 
@@ -39,7 +39,7 @@ const getTextComment =(val)=>{
 
           primary={<Box  sx={{ fontSize : '.8rem' , marginBottom : "5px" ,display : "flex" , justifyContent : "space-between" }}   component="span" >    
                          <p> {props.commentdata.name} </p> 
-                         <Box component="span"  >
+                         <Box component="span" sx={{width : "80px" , display : "flex" , justifyContent : "flex-end" ,}}  >
                             <IconButton  size="small" onClick={()=> setEdit(!edit) }  aria-label="remove">
                                
                                 {( edit ?  <EditOffIcon  color="secondary"  sx={{ fontSize : '.8rem' }}/>   :  <EditIcon  sx={{ fontSize : '.8rem' }}/>  )}
