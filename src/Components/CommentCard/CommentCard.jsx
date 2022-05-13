@@ -42,7 +42,7 @@ const getTextComment =(val)=>{
                          <Box component="span"  >
                             <IconButton  size="small" onClick={()=> setEdit(!edit) }  aria-label="remove">
                                
-                                {( edit ?  <EditOffIcon  sx={{ fontSize : '.8rem' }}/>   :  <EditIcon  sx={{ fontSize : '.8rem' }}/>  )}
+                                {( edit ?  <EditOffIcon  color="secondary"  sx={{ fontSize : '.8rem' }}/>   :  <EditIcon  sx={{ fontSize : '.8rem' }}/>  )}
 
                             </IconButton> 
 

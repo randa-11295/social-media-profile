@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
@@ -10,26 +9,16 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import EditIcon from '@mui/icons-material/Edit';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Input from "../Input/Input"
 import ClearIcon from '@mui/icons-material/Clear';
 import EditOffIcon from '@mui/icons-material/EditOff';
 import avatar from "../../Images/avatar.jpg"
-import Comments from "../Comments/Comments"
-
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
+import Comments from "../Comments/Comments";
+import MessageRoundedIcon from '@mui/icons-material/MessageRounded';
 
 export default function PostCard(props) {
   const [expanded, setExpanded] = React.useState(false);
+  const [like, setLike] = React.useState(false);
   const [edit, setEdit] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -59,7 +48,7 @@ export default function PostCard(props) {
         subheader={props.postsData.title}
       />
      
-      <CardContent>
+      <CardContent >
 
         <Typography  component={'div'} variant="body2" color="text.secondary">
             {( edit ? <Input val={props.postsData.body} row={3}  fun={getTextEditPost} /> : <p>  {props.postsData.body} </p>)  }
@@ -67,22 +56,21 @@ export default function PostCard(props) {
 
       </CardContent>
 
-      <CardActions disableSpacing>
+      <CardActions sx={{ justifyContent: "space-between"}} disableSpacing>
+         <aside>
+              <IconButton onClick={()=>{setLike(!like)}} aria-label="favorites">
+                <FavoriteIcon   color={like ? "secondary" : "default"} />
+              </IconButton>
 
-        <IconButton aria-label="favorites">
-          <FavoriteIcon />
-        </IconButton>
+              <IconButton onClick={handleExpandClick} aria-label="share">
+                  <MessageRoundedIcon  color={expanded ? "secondary" : "default"}/>
+              </IconButton>
+         </aside>
+
         <IconButton onClick={()=>{setEdit(!edit)}} aria-label="share">
-        {( edit ? <EditOffIcon /> : <EditIcon /> )}
+        {( edit ? <EditOffIcon  color= "secondary" /> : <EditIcon /> )}
         </IconButton>
-        <ExpandMore
-          expand={expanded}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </ExpandMore>
+
 
       </CardActions>
 
