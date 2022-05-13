@@ -15,7 +15,7 @@ const avatarStyle = {
             position: 'relative',
             top : "-90px",
             margin : '0 auto -90px',
-            border : "5px white solid",
+            outline : "7px white solid",
             backgroundImage : `url(${avatar})` ,             
           backgroundPosition : 'center',
           backgroundSize : "cover" ,

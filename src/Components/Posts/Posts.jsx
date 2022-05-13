@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import { v4 as uuid } from 'uuid';
 
 const Posts = ()=>{
-    const [data , setData]  = useState([])
+    const [postsData , setPostsData]  = useState([])
 
     const addNewPostHandel = (val)=>{
       if(val){
@@ -15,22 +15,22 @@ const Posts = ()=>{
                               title: "New Post",
                               body: val  }
 
-          setData([newPost , ...data])
+         setPostsData([newPost , ...postsData])
         }}
 
     const removePostHandel = (id)=>{
-         const removedPost = data.filter(el =>{
+         const removedPost = postsData.filter(el =>{
               return (el.id !== id) })
-         setData(removedPost)
+          setPostsData(removedPost)
     }
    
     const editPostHandel =(id , val) =>{
 
-         const indxEl =  data.findIndex((el)=>{
+         const indxEl =  postsData.findIndex((el)=>{
           return el.id === id
           })
 
-         setData( data.map((item, index) =>{
+          setPostsData( postsData.map((item, index) =>{
           
           return  index === indxEl ? { ...item, 'body' : val } : item      
      }))
@@ -38,7 +38,7 @@ const Posts = ()=>{
 
      useEffect(()=>{
           axios.get('https://jsonplaceholder.typicode.com/posts').then(function (response) {
-               setData(response.data)
+               setPostsData(response.data)
           }).catch(function (error) {
                console.error(error);
           });
@@ -48,8 +48,8 @@ const Posts = ()=>{
                   <Box sx={{ width:{ xs : "85%" , sm : "75%" , md : "60%" , lg :  '50%' }, margin : "30px auto 0" ,  }}>
                      <Input text="add new post" fun={addNewPostHandel} uniqe='post' row="5" />
                   </Box>
-               { data?.map((el)=>{
-                      return <PostCard removePost={removePostHandel}  editPost={editPostHandel} data={el} key={el.id}/>
+               { postsData?.map((el)=>{
+                      return <PostCard removePost={removePostHandel}  editPost={editPostHandel} postsData={el} key={el.id}/>
                })}
             </main>
         )}

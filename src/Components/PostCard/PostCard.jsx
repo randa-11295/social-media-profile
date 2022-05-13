@@ -15,7 +15,7 @@ import Input from "../Input/Input"
 import ClearIcon from '@mui/icons-material/Clear';
 import EditOffIcon from '@mui/icons-material/EditOff';
 import avatar from "../../Images/avatar.jpg"
-
+import Comments from "../Comments/Comments"
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -38,7 +38,7 @@ export default function PostCard(props) {
 
   const getTextEditPost= (val)=>{
 
-     props.editPost(props.data.id , val)
+     props.editPost(props.postsData.id , val)
      setEdit(false)
 
   }
@@ -52,13 +52,13 @@ export default function PostCard(props) {
                  </IconButton>  }
  
         title="Randa Mohamed"
-        subheader={props.data.title}
+        subheader={props.postsData.title}
       />
      
       <CardContent>
 
         <Typography  component={'div'} variant="body2" color="text.secondary">
-            {( edit ? <Input  fun={getTextEditPost} /> : <p>  {props.data.body} </p>)  }
+            {( edit ? <Input  fun={getTextEditPost} /> : <p>  {props.postsData.body} </p>)  }
         </Typography>
 
       </CardContent>
@@ -84,9 +84,7 @@ export default function PostCard(props) {
           
           <Input />
      
-          <Typography>
-              Set aside off of the heat to let rest for 10 minutes, and then serve.
-          </Typography>
+          <Comments />
 
         </CardContent>
       </Collapse>
