@@ -15,7 +15,7 @@ export default function InputAdornments(props) {
 
 
   return (
-        <FormControl fullWidth  variant="outlined"   component="span"  >
+        <FormControl fullWidth  variant="outlined" color="secondary"  component="span"  >
              <FormHelperText id="outlined--helper-text">{props.text}</FormHelperText>
           <OutlinedInput  component="span"  sx={{ fontSize : ".8rem" , background : "white"}}
             id={`outlined-adornment-${props.unique}`}
